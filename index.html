@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mumbai University - Blockchain Degree Verification System</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+    <!-- Header Navigation -->
+    <header class="bg-slate-800 border-b border-slate-700 shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-amber-500 to-indigo-600 flex items-center justify-center shadow-md">
+                    <i class="fa-solid fa-graduation-cap text-2xl text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-white tracking-wide">University of Mumbai</h1>
+                    <p class="text-xs text-amber-400 font-medium">Blockchain Academic Credential Verification Engine</p>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <nav class="flex bg-slate-900 p-1 rounded-lg border border-slate-700">
+                <button onclick="switchTab('verify')" id="tab-verify" class="px-4 py-2 text-sm font-semibold rounded-md bg-indigo-600 text-white transition-all">
+                    <i class="fa-solid fa-shield-halved mr-1.5"></i> Verify Degree
+                </button>
+                <button onclick="switchTab('issue')" id="tab-issue" class="px-4 py-2 text-sm font-semibold rounded-md text-slate-400 hover:text-white transition-all">
+                    <i class="fa-solid fa-file-contract mr-1.5"></i> University Portal (Issue)
+                </button>
+                <button onclick="switchTab('explorer')" id="tab-explorer" class="px-4 py-2 text-sm font-semibold rounded-md text-slate-400 hover:text-white transition-all">
+                    <i class="fa-solid fa-cubes mr-1.5"></i> Block Explorer
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full">
+        <!-- Banner Info -->
+        <div class="mb-8 p-4 rounded-xl bg-gradient-to-r from-indigo-950 via-slate-800 to-slate-900 border border-indigo-500/30 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-circle-info text-2xl text-indigo-400"></i>
+                <div>
+                    <h3 class="font-semibold text-white">Mumbai University Mini Project Demonstration</h3>
+                    <p class="text-xs text-slate-300">Immutable SHA-256 Ledger preventing degree fraud and enabling instant employer verification.</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-ping"></span> Chain Status: Tamper-Proof
+                </span>
+            </div>
+        </div>
+        
+        <!-- SECTIONS PLACEHOLDER -->
+        <!-- TAB 1: VERIFY CERTIFICATE -->
+        <section id="section-verify" class="block space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-xl">
+                <h2 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-magnifying-glass text-indigo-400"></i> Employer Verification Portal
+                </h2>
+                <p class="text-sm text-slate-400 mb-6">Enter Certificate ID or PRN number to verify degree authenticity against the immutable blockchain ledger.</p>
+
+                <div class="flex flex-col md:flex-row gap-3">
+                    <input type="text" id="verifyCertInput" placeholder="e.g. MU-2026-COMP-101" 
+                        class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+                    <button onclick="verifyCertificate()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-3 rounded-xl transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-check-double"></i> Verify Certificate
+                    </button>
+                </div>
+
+                <!-- Sample Quick Buttons -->
+                <div class="mt-4 flex flex-wrap items-center gap-2 text-xs text-slate-400">
+                    <span>Try Demo IDs:</span>
+                    <button onclick="fillCertId('MU-2026-COMP-101')" class="px-2.5 py-1 bg-slate-700 hover:bg-slate-600 text-indigo-300 rounded-md font-mono">MU-2026-COMP-101</button>
+                    <button onclick="fillCertId('MU-2026-IT-102')" class="px-2.5 py-1 bg-slate-700 hover:bg-slate-600 text-indigo-300 rounded-md font-mono">MU-2026-IT-102</button>
+                    <button onclick="fillCertId('MU-FAKE-999')" class="px-2.5 py-1 bg-slate-700 hover:bg-slate-600 text-rose-400 rounded-md font-mono">MU-FAKE-999 (Test Invalid)</button>
+                </div>
+            </div>
+
+            <!-- Verification Result Container -->
+            <div id="verifyResult" class="hidden"></div>
+        </section>
+        <!-- ISSUE PLACEHOLDER -->
+        <!-- TAB 2: ISSUE CERTIFICATE -->
+        <section id="section-issue" class="hidden space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-xl max-w-3xl mx-auto">
+                <h2 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-stamp text-amber-400"></i> Mumbai University Admin - Mint New Certificate Block
+                </h2>
+                <p class="text-sm text-slate-400 mb-6">Issue an official degree certificate onto the blockchain network with Proof-of-Work mining.</p>
+
+                <form id="issueForm" onsubmit="handleIssue(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Student Full Name</label>
+                            <input type="text" id="studentName" required placeholder="e.g. Siddharth Verma" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">PRN (Permanent Registration No)</label>
+                            <input type="text" id="prn" required placeholder="e.g. 2022016400554433" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Degree Program</label>
+                            <select id="degree" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                                <option value="Bachelor of Engineering (Computer Engineering)">B.E. Computer Engineering</option>
+                                <option value="Bachelor of Engineering (Information Technology)">B.E. Information Technology</option>
+                                <option value="Bachelor of Science (Computer Science)">B.Sc. Computer Science</option>
+                                <option value="Bachelor of Science (Information Technology)">B.Sc. IT</option>
+                                <option value="Master of Computer Applications">M.C.A.</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Affiliated College Name</label>
+                            <input type="text" id="college" placeholder="e.g. Sardar Patel Institute of Technology" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Passing Year</label>
+                            <input type="number" id="year" value="2026" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Cumulative CGPA</label>
+                            <input type="text" id="cgpa" placeholder="e.g. 9.15" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-amber-600 to-indigo-600 hover:from-amber-500 hover:to-indigo-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg flex items-center justify-center gap-2 mt-4">
+                        <i class="fa-solid fa-cube"></i> Mine Block & Issue Certificate
+                    </button>
+                </form>
+
+                <div id="issueSuccess" class="hidden mt-6 p-4 rounded-xl bg-emerald-950/80 border border-emerald-500/50 text-emerald-200">
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: BLOCKCHAIN EXPLORER -->
+        <section id="section-explorer" class="hidden space-y-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-cubes text-indigo-400"></i> Mumbai University Blockchain Ledger Explorer
+                    </h2>
+                    <p class="text-xs text-slate-400">Real-time immutable cryptographic block visualization.</p>
+                </div>
+                <button onclick="loadChain()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-xs font-medium text-slate-200 flex items-center gap-1.5">
+                    <i class="fa-solid fa-rotate"></i> Refresh Ledger
+                </button>
+            </div>
+
+            <div id="blocksContainer" class="space-y-4">
+                <!-- Dynamic Blocks loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 border-t border-slate-700 py-4 text-center text-xs text-slate-400">
+        Mumbai University Blockchain Mini Project • Developed for Academic Examination & Demonstration
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "mumbai-university-blockchain-certificate-verifier",
+  "version": "1.0.0",
+  "description": "Blockchain-Based Academic Degree Certificate Verification System - Mumbai University Mini Project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.8",
+    "cors": "^2.8.6",
+    "express": "^4.22.3"
+  }
+}
