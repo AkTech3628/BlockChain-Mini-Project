@@ -16,22 +16,8 @@ This project solves credential fraud by implementing a __hybrid off-chain crypto
 - __⚡ Fast & Lightweight REST API:__ Express.js backend delivering sub-second response times for minting, verification, and ledger inspection.
 
 
-       [ University Admin ]                                 [ Employer / Verifier ]
-                │                                                     │
-                ▼                                                     ▼
-     Inputs Student Payload                              Inputs PRN / Degree Payload
-   (Name, PRN, Degree, Year)                              (e.g., PRN: MU2024-8849)
-                │                                                     │
-                ▼                                                     ▼
-    Generate SHA-256 Hash                                 Re-compute SHA-256 Hash
-                │                                                     │
-                ▼                                                     │
-    Proof-of-Work Mining                                              │
-    (Nonce & Target "00")                                             │
-                │                                                     │
-                ▼                                                     ▼
-  [ Immutable Blockchain Ledger ] ◄────── Fetch & Compare ────────────┘
-                │
-                ├── Hash Match & Chain Valid   ──►  🟢 AUTHENTIC / VERIFIED
-                └── Hash Mismatch / Not Found  ──►  🔴 TAMPERED / UNVERIFIED
+ <img width="945" height="487" alt="image" src="https://github.com/user-attachments/assets/1369644a-fce1-4123-a4cd-226b9fd986c0" />
+ <img width="861" height="142" alt="image" src="https://github.com/user-attachments/assets/6e0489ca-2968-4880-96c3-7fb8a3b74e57" />
+
+
 
